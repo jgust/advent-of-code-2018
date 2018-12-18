@@ -1,8 +1,7 @@
 [package]
-name = "day_1p2"
+name = "day1"
 version = "0.1.0"
 authors = ["Julius Gustavsson <juliusb@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-day_1p1 = { path = "../day_1p1" }

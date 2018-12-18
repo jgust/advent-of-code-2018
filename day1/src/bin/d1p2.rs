@@ -1,7 +1,6 @@
 use std::io;
 
-use day_1p1::{prep_input, INPUT};
-use day_1p2::find_first_repeated_freq;
+use day1::{find_first_repeated_freq, prep_input, INPUT};
 
 fn main() -> Result<(), io::Error> {
     let input = prep_input(io::Cursor::new(INPUT))?;

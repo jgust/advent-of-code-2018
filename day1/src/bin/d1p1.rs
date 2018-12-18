@@ -1,6 +1,6 @@
 use std::io;
 
-use day_1p1::{prep_input, INPUT};
+use day1::{prep_input, INPUT};
 
 fn main() -> Result<(), io::Error> {
     let input = prep_input(io::Cursor::new(INPUT))?;
