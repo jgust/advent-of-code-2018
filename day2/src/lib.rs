@@ -3,6 +3,13 @@ use std::collections::HashMap;
 
 pub static INPUT: &'static str = include_str!("input.txt");
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum Error {
+    StringLengthMismatch,
+}
+
+type Result<T> = std::result::Result<T, Error>;
+
 pub fn count_occurences(word: &str) -> (u32, u32) {
     let mut histogram = HashMap::with_capacity(word.len());
     let mut counts = vec![0; word.len()];
@@ -47,4 +54,25 @@ pub fn calc_checksum(words: &[&str]) -> u32 {
         .map(|w| count_occurences(w))
         .fold((0, 0), |tot, n| (tot.0 + n.0, tot.1 + n.1));
     no_twos * no_threes
+}
+
+pub fn hamming_distance(s1: &str, s2: &str) -> Result<u32> {
+    if s1.len() != s2.len() {
+        return Err(Error::StringLengthMismatch);
+    }
+
+    let distance = s1
+        .chars()
+        .zip(s2.chars())
+        .map(|(c1, c2)| if c1 != c2 { 1 } else { 0 })
+        .sum();
+
+    Ok(distance)
+}
+
+#[test]
+fn test_hamming_distance() {
+    assert_eq!(Ok(2), hamming_distance("abcde", "axcye"));
+    assert_eq!(Ok(1), hamming_distance("fghij", "fguij"));
+    assert_eq!(Ok(0), hamming_distance("abcde", "abcde"));
 }
